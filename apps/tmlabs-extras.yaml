@@ -1,0 +1,31 @@
+# Argo CD Application for cluster resources the Aspire chart does not generate:
+# the public Ingress and the ExternalSecrets that feed the app's Secrets.
+#
+# Keep this synced *before* the app is first deployed so the Secrets exist when
+# the pods start. Afterwards the two Applications sync independently.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tmlabs-extras
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/TiyiselaniIndustries/tmlabs-gitops.git
+    targetRevision: main
+    path: manifests/tmlabs-extras
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tmlabs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 5m
