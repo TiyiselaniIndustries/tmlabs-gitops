@@ -1,5 +1,10 @@
 # Public entry point for the Next.js frontend.
 #
+# No ingressClassName is set, so the cluster's default IngressClass handles it.
+# Add one if your cluster has no default:
+#   spec.ingressClassName: traefik      # k3s default
+#   spec.ingressClassName: nginx        # ingress-nginx
+#
 # The gateway stays ClusterIP on purpose: the frontend calls it server-side
 # (API_URL=http://gateway-service:8080), so the browser never needs it.
 apiVersion: networking.k8s.io/v1
@@ -7,12 +12,6 @@ kind: Ingress
 metadata:
   name: tmlabs-web
   namespace: tmlabs
-  annotations:
-    # Fill in for your cluster's ingress controller, and delete this TODO.
-    # k3s/traefik:   kubernetes.io/ingress.class: traefik
-    # nginx:         kubernetes.io/ingress.class: nginx
-    # cert-manager:  cert-manager.io/cluster-issuer: <issuer-name>
-    TODO-set-ingress-class: "true"
 spec:
   rules:
     - host: blog-test.tiyiselani.com
