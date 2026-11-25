@@ -1,12 +1,20 @@
-# Public entry point for the Next.js frontend.
+# Public entry points.
 #
 # No ingressClassName is set, so the cluster's default IngressClass handles it.
 # Add one if your cluster has no default:
 #   spec.ingressClassName: traefik      # k3s default
 #   spec.ingressClassName: nginx        # ingress-nginx
 #
-# The gateway stays ClusterIP on purpose: the frontend calls it server-side
-# (API_URL=http://gateway-service:8080), so the browser never needs it.
+# Two paths, longest-prefix wins:
+#
+#   /api/blog  → gateway-service  so the public blog repo workflow can call
+#                                 POST /api/blog/sync. The endpoint requires an
+#                                 `admin` token AND a syncToken, so exposing the
+#                                 path is not the same as exposing the operation.
+#   /          → web-service      everything else.
+#
+# The rest of the gateway (/api/chat) stays cluster-internal, and the frontend
+# reaches it server-side via API_URL=http://gateway-service:8080.
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -17,6 +25,13 @@ spec:
     - host: blog-test.tiyiselani.com
       http:
         paths:
+          - path: /api/blog
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway-service
+                port:
+                  number: 8080
           - path: /
             pathType: Prefix
             backend:
