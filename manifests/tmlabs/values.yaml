@@ -1,15 +1,15 @@
 parameters:
   blogapi:
     port_http: 8080
-    blogapi_image: "192.168.1.10:8080/tmlabs/blogapi:3b90044-10"
+    blogapi_image: "192.168.1.10:8080/tmlabs/blogapi:02f242f-11"
   chatservice:
     port_http: 8080
-    chatservice_image: "192.168.1.10:8080/tmlabs/chatservice:3b90044-10"
+    chatservice_image: "192.168.1.10:8080/tmlabs/chatservice:02f242f-11"
   gateway:
     port_http: 8080
-    gateway_image: "192.168.1.10:8080/tmlabs/gateway:3b90044-10"
+    gateway_image: "192.168.1.10:8080/tmlabs/gateway:02f242f-11"
   web:
-    web_image: "192.168.1.10:8080/tmlabs/web:3b90044-10"
+    web_image: "192.168.1.10:8080/tmlabs/web:02f242f-11"
 secrets:
   blogapi:
     tmlabs_db: ""
@@ -57,13 +57,13 @@ config:
     GATEWAY_HTTP: ""
     services__gateway__http__0: ""
     GATEWAY_HTTPS: ""
-    app_url: ""
+    app_url: "https://blog-test.tiyiselani.com"
     AUTH_TRUST_HOST: "true"
     API_URL: ""
     NEXT_PUBLIC_API_BASE_URL: ""
-    keycloak_url: ""
-    keycloak_realm: ""
-    keycloak_client_id: ""
+    keycloak_url: "https://auth.tiyiselani.com"
+    keycloak_realm: "non-prod"
+    keycloak_client_id: "tmlabs-frontend"
     NEXT_PUBLIC_KEYCLOAK_REDIRECT_URI: ""
     OTEL_EXPORTER_OTLP_ENDPOINT: ""
     OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
