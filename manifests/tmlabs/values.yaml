@@ -1,15 +1,15 @@
 parameters:
   blogapi:
     port_http: 8080
-    blogapi_image: "192.168.1.10:8080/tmlabs/blogapi:02f242f-12"
+    blogapi_image: "192.168.1.10:8080/tmlabs/blogapi:93c6ed4-13"
   chatservice:
     port_http: 8080
-    chatservice_image: "192.168.1.10:8080/tmlabs/chatservice:02f242f-12"
+    chatservice_image: "192.168.1.10:8080/tmlabs/chatservice:93c6ed4-13"
   gateway:
     port_http: 8080
-    gateway_image: "192.168.1.10:8080/tmlabs/gateway:02f242f-12"
+    gateway_image: "192.168.1.10:8080/tmlabs/gateway:93c6ed4-13"
   web:
-    web_image: "192.168.1.10:8080/tmlabs/web:02f242f-12"
+    web_image: "192.168.1.10:8080/tmlabs/web:93c6ed4-13"
 secrets:
   blogapi:
     tmlabs_db: ""
@@ -18,6 +18,7 @@ secrets:
   web:
     auth_secret: ""
     revalidate_secret: ""
+    blog_sync_token: ""
 config:
   k8s_dashboard:
     ASPIRE_DASHBOARD_TELEMETRY_OPTOUT: "true"
