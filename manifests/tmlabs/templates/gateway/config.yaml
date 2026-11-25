@@ -1,0 +1,24 @@
+---
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: "gateway-config"
+  labels:
+    app.kubernetes.io/name: "{{ .Chart.Name }}"
+    app.kubernetes.io/component: "gateway"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+data:
+  OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: {{ tpl "{{ .Values.config.gateway.OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY }}" . | quote }}
+  ASPNETCORE_FORWARDEDHEADERS_ENABLED: {{ tpl "{{ .Values.config.gateway.ASPNETCORE_FORWARDEDHEADERS_ENABLED }}" . | quote }}
+  HTTP_PORTS: {{ tpl "{{ .Values.parameters.gateway.port_http | int | toString }}" . | quote }}
+  BLOGAPI_HTTP: {{ tpl "http://blogapi-service:{{ .Values.parameters.blogapi.port_http }}" . | quote }}
+  services__blogapi__http__0: {{ tpl "http://blogapi-service:{{ .Values.parameters.blogapi.port_http }}" . | quote }}
+  BLOGAPI_HTTPS: {{ tpl "https://blogapi-service:{{ .Values.parameters.blogapi.port_http }}" . | quote }}
+  CHATSERVICE_HTTP: {{ tpl "http://chatservice-service:{{ .Values.parameters.chatservice.port_http }}" . | quote }}
+  services__chatservice__http__0: {{ tpl "http://chatservice-service:{{ .Values.parameters.chatservice.port_http }}" . | quote }}
+  CHATSERVICE_HTTPS: {{ tpl "https://chatservice-service:{{ .Values.parameters.chatservice.port_http }}" . | quote }}
+  Gateway__BlogApiUrl: {{ tpl "http://blogapi-service:{{ .Values.parameters.blogapi.port_http }}" . | quote }}
+  Gateway__ChatApiUrl: {{ tpl "http://chatservice-service:{{ .Values.parameters.chatservice.port_http }}" . | quote }}
+  OTEL_EXPORTER_OTLP_ENDPOINT: {{ tpl "{{ .Values.config.gateway.OTEL_EXPORTER_OTLP_ENDPOINT }}" . | quote }}
+  OTEL_EXPORTER_OTLP_PROTOCOL: {{ tpl "{{ .Values.config.gateway.OTEL_EXPORTER_OTLP_PROTOCOL }}" . | quote }}
+  OTEL_SERVICE_NAME: {{ tpl "{{ .Values.config.gateway.OTEL_SERVICE_NAME }}" . | quote }}

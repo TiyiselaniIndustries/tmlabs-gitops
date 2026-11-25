@@ -1,0 +1,70 @@
+parameters:
+  blogapi:
+    port_http: 8080
+    blogapi_image: "192.168.1.10:8080/tmlabs/blogapi:ebdf805-6"
+  chatservice:
+    port_http: 8080
+    chatservice_image: "192.168.1.10:8080/tmlabs/chatservice:ebdf805-6"
+  gateway:
+    port_http: 8080
+    gateway_image: "192.168.1.10:8080/tmlabs/gateway:ebdf805-6"
+  web:
+    web_image: "192.168.1.10:8080/tmlabs/web:ebdf805-6"
+secrets:
+  blogapi:
+    tmlabs_db: ""
+  chatservice:
+    tmlabs_db: ""
+  web:
+    auth_secret: ""
+    revalidate_secret: ""
+config:
+  k8s_dashboard:
+    ASPIRE_DASHBOARD_TELEMETRY_OPTOUT: "true"
+  blogapi:
+    OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
+    ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
+    HTTP_PORTS: ""
+    OTEL_EXPORTER_OTLP_ENDPOINT: "http://k8s-dashboard-service:18889"
+    OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
+    OTEL_SERVICE_NAME: "blogapi"
+  chatservice:
+    OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
+    ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
+    HTTP_PORTS: ""
+    OTEL_EXPORTER_OTLP_ENDPOINT: "http://k8s-dashboard-service:18889"
+    OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
+    OTEL_SERVICE_NAME: "chatservice"
+  gateway:
+    OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
+    ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
+    HTTP_PORTS: ""
+    BLOGAPI_HTTP: ""
+    services__blogapi__http__0: ""
+    BLOGAPI_HTTPS: ""
+    CHATSERVICE_HTTP: ""
+    services__chatservice__http__0: ""
+    CHATSERVICE_HTTPS: ""
+    Gateway__BlogApiUrl: ""
+    Gateway__ChatApiUrl: ""
+    OTEL_EXPORTER_OTLP_ENDPOINT: "http://k8s-dashboard-service:18889"
+    OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
+    OTEL_SERVICE_NAME: "gateway"
+  web:
+    NODE_ENV: "production"
+    PORT: "3000"
+    HOSTNAME: "0.0.0.0"
+    GATEWAY_HTTP: ""
+    services__gateway__http__0: ""
+    GATEWAY_HTTPS: ""
+    app_url: ""
+    AUTH_TRUST_HOST: "true"
+    API_URL: ""
+    NEXT_PUBLIC_API_BASE_URL: ""
+    keycloak_url: ""
+    keycloak_realm: ""
+    keycloak_client_id: ""
+    NEXT_PUBLIC_KEYCLOAK_REDIRECT_URI: ""
+    OTEL_EXPORTER_OTLP_ENDPOINT: "http://k8s-dashboard-service:18889"
+    OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
+    OTEL_SERVICE_NAME: "web"
