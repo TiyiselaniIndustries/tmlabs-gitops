@@ -1,15 +1,15 @@
 parameters:
   blogapi:
     port_http: 8080
-    blogapi_image: "192.168.1.10:8080/tmlabs/blogapi:ebdf805-6"
+    blogapi_image: "192.168.1.10:8080/tmlabs/blogapi:a93c2e6-8"
   chatservice:
     port_http: 8080
-    chatservice_image: "192.168.1.10:8080/tmlabs/chatservice:ebdf805-6"
+    chatservice_image: "192.168.1.10:8080/tmlabs/chatservice:a93c2e6-8"
   gateway:
     port_http: 8080
-    gateway_image: "192.168.1.10:8080/tmlabs/gateway:ebdf805-6"
+    gateway_image: "192.168.1.10:8080/tmlabs/gateway:a93c2e6-8"
   web:
-    web_image: "192.168.1.10:8080/tmlabs/web:ebdf805-6"
+    web_image: "192.168.1.10:8080/tmlabs/web:a93c2e6-8"
 secrets:
   blogapi:
     tmlabs_db: ""
@@ -25,14 +25,14 @@ config:
     OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
     ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
     HTTP_PORTS: ""
-    OTEL_EXPORTER_OTLP_ENDPOINT: "http://k8s-dashboard-service:18889"
+    OTEL_EXPORTER_OTLP_ENDPOINT: ""
     OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
     OTEL_SERVICE_NAME: "blogapi"
   chatservice:
     OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
     ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
     HTTP_PORTS: ""
-    OTEL_EXPORTER_OTLP_ENDPOINT: "http://k8s-dashboard-service:18889"
+    OTEL_EXPORTER_OTLP_ENDPOINT: ""
     OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
     OTEL_SERVICE_NAME: "chatservice"
   gateway:
@@ -47,7 +47,7 @@ config:
     CHATSERVICE_HTTPS: ""
     Gateway__BlogApiUrl: ""
     Gateway__ChatApiUrl: ""
-    OTEL_EXPORTER_OTLP_ENDPOINT: "http://k8s-dashboard-service:18889"
+    OTEL_EXPORTER_OTLP_ENDPOINT: ""
     OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
     OTEL_SERVICE_NAME: "gateway"
   web:
@@ -65,6 +65,6 @@ config:
     keycloak_realm: ""
     keycloak_client_id: ""
     NEXT_PUBLIC_KEYCLOAK_REDIRECT_URI: ""
-    OTEL_EXPORTER_OTLP_ENDPOINT: "http://k8s-dashboard-service:18889"
+    OTEL_EXPORTER_OTLP_ENDPOINT: ""
     OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
     OTEL_SERVICE_NAME: "web"
