@@ -24,6 +24,9 @@ data:
   NEXT_PUBLIC_KEYCLOAK_URL: {{ tpl "{{ .Values.config.web.keycloak_url }}" . | quote }}
   NEXT_PUBLIC_KEYCLOAK_REALM: {{ tpl "{{ .Values.config.web.keycloak_realm }}" . | quote }}
   NEXT_PUBLIC_KEYCLOAK_CLIENT_ID: {{ tpl "{{ .Values.config.web.keycloak_client_id }}" . | quote }}
+  S3_ENDPOINT: {{ tpl "{{ .Values.config.web.s3_endpoint }}" . | quote }}
+  S3_BUCKET: {{ tpl "{{ .Values.config.web.s3_bucket }}" . | quote }}
+  S3_REGION: {{ tpl "{{ .Values.config.web.s3_region }}" . | quote }}
   NEXT_PUBLIC_KEYCLOAK_REDIRECT_URI: {{ tpl "{{ .Values.config.web.app_url }}/api/auth/callback/keycloak" . | quote }}
   OTEL_EXPORTER_OTLP_ENDPOINT: {{ tpl "{{ .Values.config.web.OTEL_EXPORTER_OTLP_ENDPOINT }}" . | quote }}
   OTEL_EXPORTER_OTLP_PROTOCOL: {{ tpl "{{ .Values.config.web.OTEL_EXPORTER_OTLP_PROTOCOL }}" . | quote }}
