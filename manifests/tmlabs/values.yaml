@@ -1,15 +1,15 @@
 parameters:
   blogapi:
     port_http: 8080
-    blogapi_image: "192.168.1.10:8080/tmlabs/blogapi:f261f69-17"
+    blogapi_image: "192.168.1.10:8080/tmlabs/blogapi:f261f69-18"
   chatservice:
     port_http: 8080
-    chatservice_image: "192.168.1.10:8080/tmlabs/chatservice:f261f69-17"
+    chatservice_image: "192.168.1.10:8080/tmlabs/chatservice:f261f69-18"
   gateway:
     port_http: 8080
-    gateway_image: "192.168.1.10:8080/tmlabs/gateway:f261f69-17"
+    gateway_image: "192.168.1.10:8080/tmlabs/gateway:f261f69-18"
   web:
-    web_image: "192.168.1.10:8080/tmlabs/web:f261f69-17"
+    web_image: "192.168.1.10:8080/tmlabs/web:f261f69-18"
 secrets:
   blogapi:
     tmlabs_db: ""
